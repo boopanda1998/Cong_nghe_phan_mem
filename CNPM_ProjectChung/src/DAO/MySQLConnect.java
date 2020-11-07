@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 public class MySQLConnect {
     private String user = "root";
@@ -22,13 +21,13 @@ public class MySQLConnect {
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(url, user, password);
             System.out.println("Connected");
-            return true;
+            return true; //Connect thành công
         } catch (ClassNotFoundException | SQLException ex) {
             //System.out.println(ex);
             System.out.println("Connect fail!");
             //Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Connect database thất bại!", "Waring!", JOptionPane.INFORMATION_MESSAGE);
-            return false;
+            //JOptionPane.showMessageDialog(null, "Connect database thất bại!", "Waring!", JOptionPane.INFORMATION_MESSAGE);
+            return false; //Connect thất bại
         }
     }
     public boolean disConnect()
@@ -37,9 +36,9 @@ public class MySQLConnect {
             statement.close();
             connection.close();
             System.out.println("disconnected");
-            return true;
+            return true; //Disconnect thành công
         }catch (SQLException e){
-            return false;
+            return false; //Disconnect thất bại
         }
     }
     
