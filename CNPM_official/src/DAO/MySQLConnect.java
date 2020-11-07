@@ -13,6 +13,7 @@ public class MySQLConnect {
     private String user = "root";
     private String password="";
     private String url="jdbc:mysql://localhost:3306/cnpm?useUnicode=true&characterEncoding=UTF-8";
+    private String url="jdbc:mysql://localhost:3308/cnpm?useUnicode=true&characterEncoding=UTF-8";
     private Connection connection = null;
     private Statement statement = null;
     
