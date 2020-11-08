@@ -99,11 +99,10 @@ public class KhachHangController {
                     KhachHang.setTenKH(jtfTen.getText());
                     KhachHang.setSDT(jtfSDT.getText());
                     if (!KhachHangBUS.add(KhachHang)) JOptionPane.showMessageDialog(null, "Không thể thêm vào cơ sở dữ liệu!", "Waring!", JOptionPane.INFORMATION_MESSAGE);
-                }
-                
-                cleanTextField(jtfMaKH, jtfSDT, jtfHo, jtfTen);
-                KhachHangBUS.refeshList();
-                xuatTable(TableModel, KhachHangBUS.getList());
+                    cleanTextField(jtfMaKH, jtfSDT, jtfHo, jtfTen);
+                    KhachHangBUS.refeshList();
+                    xuatTable(TableModel, KhachHangBUS.getList());
+                }                         
             }
         }
         );
