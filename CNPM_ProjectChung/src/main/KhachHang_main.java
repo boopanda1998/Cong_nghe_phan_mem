@@ -1,9 +1,8 @@
-package main;
+package GUI;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
-import GUI.KhachHangGUI;
 
-public class KhachHangMain {
+public class KhachHang_main {
 
     public static void main(String[] args) {
         JFrame frame = new JFrame();
