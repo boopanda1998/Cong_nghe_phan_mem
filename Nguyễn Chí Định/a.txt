@@ -1,1 +1,2 @@
-a
+để file cần up loasd vào thư mục này nè
+ok
