@@ -36,34 +36,34 @@ import javax.swing.table.TableRowSorter;
 public class ChamCongController {
 
     private JButton BtnChamCong;
-    private JComboBox<String> JcbPhep;
+    private JComboBox<String> JcbDiLam;
     private JLabel JlbTB;
     private JTable JtbChamCong;
-    private JTextField JtfGhiChu;
+   // private JTextField JtfGhiChu;
     private JTextField JtfMaChamCong;
     private JTextField JtfMaNhanVien;
     private JTextField JtfNgay;
     private JPanel JpnTable;
     private ClassTableModel classTableModel = null;
-    private final String[] COLUMNS = {"Mã chấm công", "Mã nhân viên", "Ngày làm", "Ngày nghỉ", "Ghi chú"};
+    private final String[] COLUMNS = {"Mã chấm công", "Mã nhân viên", "Ngày làm", "Điểm danh"};
     private ChamCongBUS chamCongBUS = null;
     private TableRowSorter<TableModel> rowSorter = null;
 
     public ChamCongController(
             JLabel JlbTB,
             JButton BtnChamCong,
-            JComboBox<String> JcbPhep,
+            JComboBox<String> JcbDiLam,
             JTable JtbChamCong,
-            JTextField JtfGhiChu,
+            
             JTextField JtfMaChamCong,
             JTextField JtfMaNhanVien,
             JTextField JtfNgay,
             JPanel JpnTable) {
         this.BtnChamCong = BtnChamCong;
-        this.JcbPhep = JcbPhep;
+        this.JcbDiLam = JcbDiLam;
         this.JlbTB = JlbTB;
         this.JtbChamCong = JtbChamCong;
-        this.JtfGhiChu = JtfGhiChu;
+        //this.JtfGhiChu = JtfGhiChu;
         this.JtfMaChamCong = JtfMaChamCong;
         this.JtfMaNhanVien = JtfMaNhanVien;
         this.JtfNgay = JtfNgay;
@@ -88,7 +88,7 @@ public class ChamCongController {
 
                 @Override
                 public Class<?> getColumnClass(int columnIndex) {
-                    return columnIndex == 5 ? Boolean.class : String.class;
+                    return columnIndex == 4 ? Boolean.class : String.class;
                 }
             };
             dtm.setColumnIdentifiers(listColumn);
@@ -101,8 +101,8 @@ public class ChamCongController {
                 obj[0] = chamCongDTO.getMacc();
                 obj[1] = chamCongDTO.getManv();
                 obj[2] = chamCongDTO.getNgaylam();
-                obj[3] = chamCongDTO.getNghicophep();
-                obj[4] = chamCongDTO.getGhichu();
+                obj[3] = chamCongDTO.getDilam();
+               // obj[4] = chamCongDTO.getGhichu();
                 dtm.addRow(obj);
             }
             return dtm;
@@ -126,21 +126,7 @@ public class ChamCongController {
         JtbChamCong.setRowHeight(50);
         JtbChamCong.validate();
         JtbChamCong.repaint();
-        JtbChamCong.getColumnModel().getColumn(0).setMaxWidth(100);
-        JtbChamCong.getColumnModel().getColumn(0).setMinWidth(90);
-        JtbChamCong.getColumnModel().getColumn(0).setPreferredWidth(40);
-        JtbChamCong.getColumnModel().getColumn(1).setMaxWidth(100);
-        JtbChamCong.getColumnModel().getColumn(1).setMinWidth(60);
-        JtbChamCong.getColumnModel().getColumn(1).setPreferredWidth(40);
-        JtbChamCong.getColumnModel().getColumn(2).setMaxWidth(100);
-        JtbChamCong.getColumnModel().getColumn(2).setMinWidth(40);
-        JtbChamCong.getColumnModel().getColumn(2).setPreferredWidth(40);
-        JtbChamCong.getColumnModel().getColumn(3).setMaxWidth(100);
-        JtbChamCong.getColumnModel().getColumn(3).setMinWidth(40);
-        JtbChamCong.getColumnModel().getColumn(3).setPreferredWidth(40);
-        JtbChamCong.getColumnModel().getColumn(4).setMaxWidth(100);
-        JtbChamCong.getColumnModel().getColumn(4).setMinWidth(40);
-        JtbChamCong.getColumnModel().getColumn(4).setPreferredWidth(40);
+        
         JScrollPane scroll = new JScrollPane();
         scroll.getViewport().add(JtbChamCong);
         scroll.setPreferredSize(new Dimension(600, 200));
@@ -169,8 +155,8 @@ public class ChamCongController {
                     String i;
                     i=sdf.format(date);
                     chamCongDTO.setNgaylam(i);
-                    chamCongDTO.setNghicophep(JcbPhep.getSelectedItem().toString());
-                    chamCongDTO.setGhichu(JtfGhiChu.getText());
+                    chamCongDTO.setDilam(JcbDiLam.getSelectedItem().toString());
+                  //  chamCongDTO.setGhichu(JtfGhiChu.getText());
                     if (YesOrNo()) {
                         chamCongBUS.Insert(chamCongDTO);
                         listItem.add(chamCongDTO);
@@ -196,7 +182,7 @@ public class ChamCongController {
                 {
                     ChamCongDTO s = listItem.get(listItem.size() - 1);
                     model.addRow(new Object[]{
-                        s.getMacc(), s.getManv(), s.getNgaylam(), s.getNghicophep(), s.getGhichu()
+                        s.getMacc(), s.getManv(), s.getNgaylam(), s.getDilam(), s.getGhichu()
                     });
                 }
             }
@@ -211,14 +197,14 @@ public class ChamCongController {
                     chamCongDTO.setMacc(model.getValueAt(selectedRowIndex, 0).toString());
                     chamCongDTO.setManv(model.getValueAt(selectedRowIndex, 1).toString());
                     chamCongDTO.setNgaylam(model.getValueAt(selectedRowIndex, 2).toString());
-                    chamCongDTO.setNghicophep(model.getValueAt(selectedRowIndex, 3).toString());
+                    chamCongDTO.setDilam(model.getValueAt(selectedRowIndex, 3).toString());
                     chamCongDTO.setGhichu(model.getValueAt(selectedRowIndex, 4).toString());
                     JtfMaChamCong.setText("" + chamCongDTO.getMacc());
                     JtfMaChamCong.setEditable(false);
                     JtfMaNhanVien.setText(chamCongDTO.getManv());
                     JtfNgay.setText(chamCongDTO.getNgaylam());
-                    JcbPhep.setSelectedItem(chamCongDTO.getNghicophep());
-                    JtfGhiChu.setText(chamCongDTO.getGhichu());
+                    JcbDiLam.setSelectedItem(chamCongDTO.getDilam());
+                    //JtfGhiChu.setText(chamCongDTO.getGhichu());
                     JlbTB.setText("Thông tin nghỉ.");
                 }
             }

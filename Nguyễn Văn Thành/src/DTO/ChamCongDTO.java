@@ -10,7 +10,7 @@ package DTO;
  * @author Min-NvT
  */
 public class ChamCongDTO {
-     private String macc,manv,ngaylam,nghicophep,ghichu;
+     private String macc,manv,ngaylam,dilam,ghichu;
 
     public String getMacc() {
         return macc;
@@ -36,14 +36,15 @@ public class ChamCongDTO {
         this.ngaylam = ngaylam;
     }
 
-    public String getNghicophep() {
-        return nghicophep;
+    public String getDilam() {
+        return dilam;
     }
 
-    public void setNghicophep(String nghicophep) {
-        this.nghicophep = nghicophep;
+    public void setDilam(String dilam) {
+        this.dilam = dilam;
     }
 
+   
     public String getGhichu() {
         return ghichu;
     }

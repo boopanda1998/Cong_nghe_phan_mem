@@ -28,8 +28,8 @@ public class ChamCongDAO{
                 chamCongDTO.setMacc(rs.getString("macc"));
                 chamCongDTO.setManv(rs.getString("manv"));
                 chamCongDTO.setNgaylam(rs.getString("ngaylam"));
-                chamCongDTO.setNghicophep(rs.getString("nghicophep"));
-                chamCongDTO.setGhichu(rs.getString("ghichu"));             
+                chamCongDTO.setDilam(rs.getString("dilam"));
+               // chamCongDTO.setGhichu(rs.getString("ghichu"));             
                 list.add(chamCongDTO);
             }
             ps.close();
@@ -58,15 +58,15 @@ public class ChamCongDAO{
   public static int  Insert(ChamCongDTO chamCongDTO){
       try {
             Connection cons = DBConnect.getConnection();
-            String sql = "INSERT INTO nhanvien(macc,manv,ngaylam,nghicophep,ghichu) "
-                    + "VALUES ( ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO nhanvien(macc,manv,ngaylam,dilam) "
+                    + "VALUES ( ?, ?, ?, ?)";
             PreparedStatement ps = cons.prepareStatement(sql); 
             System.out.println("kiem tra ma cham cong" +chamCongDTO.getMacc());
             ps.setString(1, chamCongDTO.getMacc());
             ps.setString(2, chamCongDTO.getManv());
             ps.setString(3, chamCongDTO.getNgaylam());
-            ps.setString(4, chamCongDTO.getNghicophep());
-            ps.setString(5, chamCongDTO.getGhichu());
+            ps.setString(4, chamCongDTO.getDilam());
+           // ps.setString(5, chamCongDTO.getGhichu());
             int insert = ps.executeUpdate();
             System.out.println((insert!=0)? (insert + " customers insert") : " Thêm  lỗi!DAO"); 
             ps.close();
@@ -80,13 +80,13 @@ public class ChamCongDAO{
    public static int Update(ChamCongDTO chamCongDTO){
         try {
             Connection cons = DBConnect.getConnection();
-           String sql="UPDATE chamcong SET manv=?,ngaylam=?,nghicophep=?,ghichu=? WHERE macc=?";
+           String sql="UPDATE chamcong SET manv=?,ngaylam=?,dilam=? WHERE macc=?";
             PreparedStatement ps = cons.prepareStatement(sql);
           ps.setString(1, chamCongDTO.getMacc());
             ps.setString(2, chamCongDTO.getManv());
             ps.setString(3, chamCongDTO.getNgaylam());
-            ps.setString(4, chamCongDTO.getNghicophep());
-            ps.setString(5, chamCongDTO.getGhichu());
+            ps.setString(4, chamCongDTO.getDilam());
+           // ps.setString(5, chamCongDTO.getGhichu());
             int update = ps.executeUpdate();
             System.out.println((update!=0)? (update + " customers updated") : " Sửa lỗi!DAO");
             ps.close();
